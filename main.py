@@ -55,7 +55,7 @@ def get_args() -> tuple:
         raise ValueError(f"train-start must be between 0 and {TRAIN_MAX} (inclusive)")
 
     train_size_index = sys.argv.index("-train-size") if "-train-size" in sys.argv else -1
-    train_size = int(sys.argv[train_size_index + 1]) if train_size_index != -1 else None
+    train_size = int(sys.argv[train_size_index + 1]) if train_size_index != -1 else TRAIN_MAX - train_start
 
     if (train_size is not None) and (train_size <= 0 or train_size + train_start > TRAIN_MAX):
         raise ValueError(f"train-size must be between 1 and {TRAIN_MAX - train_start} (inclusive) for train-start value {train_start}")
@@ -67,7 +67,7 @@ def get_args() -> tuple:
         raise ValueError(f"test-start must be between 0 and {TEST_MAX} (inclusive)")
 
     test_size_index = sys.argv.index("-test-size") if "-test-size" in sys.argv else -1
-    test_size = int(sys.argv[test_size_index + 1]) if test_size_index != -1 else None
+    test_size = int(sys.argv[test_size_index + 1]) if test_size_index != -1 else TEST_MAX - test_start
 
     if (test_size is not None) and (test_size <= 0 or test_size + test_start > TEST_MAX):
         raise ValueError(f"test-size must be between 1 and {TEST_MAX - test_start} (inclusive) for test-start value {test_start}")
